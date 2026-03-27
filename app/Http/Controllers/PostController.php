@@ -14,7 +14,6 @@ class PostController extends Controller {
     }
     public function store(PostRequest $request) {
         $post = Post::create($request->all());
-//        logger($request);
         return response($post, 201);
     }
     public function show(Post $post) {
@@ -24,7 +23,7 @@ class PostController extends Controller {
         $post = $post->update($request->all());
         return response($post, 202);
     }
-    public function destroy($id) {
-
+    public function destroy(Post $post) {
+        return $post->delete();
     }
 }

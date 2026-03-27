@@ -12,5 +12,5 @@ Route::get('/posts', [PostController::class, 'index']);
 Route::post('/post', [PostController::class, 'store']);
 Route::get('/post/{post}', [PostController::class, 'show']);
 Route::patch('/post/{post}', [PostController::class, 'update']);
-Route::delete('/post', [PostController::class, 'destroy']);
+Route::delete('/post/{post}', [PostController::class, 'destroy']);
 

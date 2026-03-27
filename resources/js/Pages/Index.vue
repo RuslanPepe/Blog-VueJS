@@ -4,7 +4,10 @@
             <div class="card-body d-flex flex-column">
                 <h5 class="card-title">{{ post.id }}</h5>
                 <p class="card-text">{{ post.title }}</p>
-                <router-link :to="`/show/${post.id}`" class="btn btn-outline-primary align-self-end mt-auto">show</router-link>
+                <div class="row justify-content-evenly align-items-end mt-auto">
+                    <router-link :to="`/show/${post.id}`" class="btn btn-outline-primary mt-auto col-5">show</router-link>
+                    <button class="btn btn-outline-danger mt-auto col-5" @click="destroyPost(post.id)">delete</button>
+                </div>
             </div>
         </div>
     </div>
@@ -24,6 +27,7 @@
 <script setup>
 
 import {onMounted, reactive, ref} from "vue";
+import {useRouter} from "vue-router";
 
 const posts = ref([])
 
@@ -42,8 +46,18 @@ const getPosts = () => {
     axios.get('/api/posts')
         .then(res => {
             posts.value = res.data
-            console.log(posts.value)
         })
+}
+
+const destroyPost = (id) => {
+    axios.delete(`/api/post/${id}`)
+        .then(res => {
+            res.status === 200 ? getPosts() : ''
+            console.log(res)
+        })
+        .catch(err => {
+        console.log(err)
+    })
 }
 
 </script>
