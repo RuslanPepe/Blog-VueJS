@@ -9,19 +9,31 @@
             <input type="text" class="form-control" v-model="post.content" id="ContentControlInput" >
         </div>
         <div class="mb-3 d-flex justify-content-end">
-            <button class="btn btn-outline-primary">Submit</button>
+            <button class="btn btn-outline-primary" @click="storePost">Submit</button>
         </div>
     </div>
-    {{ post }}
 </template>
 
 <script setup>
-import {reactive, ref} from "vue";
+import {ref} from "vue";
+import {useRouter} from "vue-router";
 
-const post = reactive({
+const router = useRouter();
+
+const post = ref({
     title: '',
     content: ''
 })
+
+const storePost = () => {
+    axios.post('/api/post', post.value)
+        .then(res => {
+            res.status === 201 ? router.push({ name:'post.show', params: { id: res.data.id } }) : ''
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
 
 </script>
 

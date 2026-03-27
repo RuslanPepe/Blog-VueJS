@@ -11,10 +11,10 @@
 
     <nav aria-label="Page navigation">
         <ul class="pagination my-3 mx-2">
-            <li class="page-item mx-1 paginateLink" @click="paginatePost(posts.links.prev)">Prev</li>
-            <li class="page-item mx-1 paginateLink" @click="paginatePost(posts.links.next)">Next</li>
-            <li class="page-item mx-1 paginateLink" @click="paginatePost(posts.links.last)">Last</li>
-            <li class="page-item mx-1 paginateLink" @click="paginatePost(posts.links.first)">First</li>
+            <li class="page-item mx-1 paginate-link" @click="paginatePost(posts.links.prev)">Prev</li>
+            <li class="page-item mx-1 paginate-link" @click="paginatePost(posts.links.next)">Next</li>
+            <li class="page-item mx-1 paginate-link" @click="paginatePost(posts.links.last)">Last</li>
+            <li class="page-item mx-1 paginate-link" @click="paginatePost(posts.links.first)">First</li>
         </ul>
     </nav>
 
@@ -49,7 +49,7 @@ const getPosts = () => {
 </script>
 
 <style scoped>
-.paginateLink {
+.paginate-link {
     cursor: pointer;
 }
 </style>

@@ -22,7 +22,7 @@ const routes = [
         component: Show
     },
     {
-        path: '/edit',
+        path: '/edit/:id',
         'name': 'post.edit',
         component: Edit
     },

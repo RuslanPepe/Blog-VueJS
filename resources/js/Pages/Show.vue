@@ -4,11 +4,14 @@
 
         <p class="content">Content: {{ post.content }}</p>
     </div>
+    <div class="update-btn w-50 mx-auto d-flex flex-column">
+        <router-link :to="{ name: `post.edit`, params: { id: post.id } }" class="btn btn-outline-success align-self-end mt-auto">edit</router-link>
+    </div>
 </template>
 
 <script setup>
 import router from "../Router.js";
-import {onMounted, reactive, ref} from "vue";
+import {onMounted, ref} from "vue";
 
 const post = ref([])
 
@@ -23,7 +26,6 @@ const getPosts = () => {
             post.value = res.data.data
         })
 }
-
 
 </script>
 

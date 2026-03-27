@@ -11,6 +11,6 @@ use App\Http\Controllers\PostController;
 Route::get('/posts', [PostController::class, 'index']);
 Route::post('/post', [PostController::class, 'store']);
 Route::get('/post/{post}', [PostController::class, 'show']);
-Route::patch('/post', [PostController::class, 'update']);
+Route::patch('/post/{post}', [PostController::class, 'update']);
 Route::delete('/post', [PostController::class, 'destroy']);
 
