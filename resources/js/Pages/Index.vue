@@ -1,69 +1,57 @@
 <template>
+
+<!--    {{ postStore.posts }}-->
+
     <div class="row justify-content-evenly">
-        <div class="card col-2 mx-1 my-2" v-for="post in posts.data" :key="post.id">
+        <div class="card col-2 mx-1 my-2" v-for="post in postStore.posts.data" :key="post.id">
             <div class="card-body d-flex flex-column">
-                <h5 class="card-title">{{ post.id }}</h5>
-                <p class="card-text">{{ post.title }}</p>
+                <div class="d-flex align-items-start justify-content-between">
+                    <h5 class="card-title">{{ post.id }}</h5>
+
+                    <button class="LikedBtn">
+<!--                        <img src="/public/like.png" v-show="post.isLiked" alt="" class="Heart">-->
+                    </button>
+
+
+<!--                    :id="this.$el.attributes.getNamedItem('data-status')"-->
+<!--                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">-->
+<!--                        <path stroke-linecap="round" size="32" class="Heart liked" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />-->
+<!--                    </svg>-->
+<!--                    <img src="/public/heart-svgrepo-com.svg" class="w-8 Heart liked" alt="">-->
+                </div>
+                <p class="card-text my-3">{{ post.title }}</p>
                 <div class="row justify-content-evenly align-items-end mt-auto">
                     <router-link :to="`/show/${post.id}`" class="btn btn-outline-primary mt-auto col-5">show</router-link>
-                    <button class="btn btn-outline-danger mt-auto col-5" @click="destroyPost(post.id)">delete</button>
+                    <button class="btn btn-outline-danger mt-auto col-5" @click="postStore.destroyPost(post.id)">delete</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <nav aria-label="Page navigation">
-        <ul class="pagination my-3 mx-2">
-            <li class="page-item mx-1 paginate-link" @click="paginatePost(posts.links.prev)">Prev</li>
-            <li class="page-item mx-1 paginate-link" @click="paginatePost(posts.links.next)">Next</li>
-            <li class="page-item mx-1 paginate-link" @click="paginatePost(posts.links.last)">Last</li>
-            <li class="page-item mx-1 paginate-link" @click="paginatePost(posts.links.first)">First</li>
-        </ul>
-    </nav>
+    <PageNavigation v-show="postStore.posts" @updatePosts="postStore.posts = $event" :links="postStore.posts.links" />
 
-<!--    {{ posts.links }}-->
 </template>
 
 <script setup>
+import {onBeforeMount, onMounted, ref} from "vue";
+import PageNavigation from "../Components/PageNavigation.vue";
+import {usePostStore} from "../stores/post.js";
 
-import {onMounted, reactive, ref} from "vue";
-import {useRouter} from "vue-router";
+const postStore = usePostStore()
 
-const posts = ref([])
-
-onMounted(() => {
-    getPosts()
+onBeforeMount(() => {
+    postStore.getPosts()
 })
 
-const paginatePost = (url) => {
-    axios.get(url)
-        .then(res => {
-            posts.value = res.data
-        })
-}
-
-const getPosts = () => {
-    axios.get('/api/posts')
-        .then(res => {
-            posts.value = res.data
-        })
-}
-
-const destroyPost = (id) => {
-    axios.delete(`/api/post/${id}`)
-        .then(res => {
-            res.status === 200 ? getPosts() : ''
-            console.log(res)
-        })
-        .catch(err => {
-        console.log(err)
-    })
-}
 
 </script>
 
 <style scoped>
-.paginate-link {
-    cursor: pointer;
+.Heart {
+    width: 32px;
+}
+
+.liked {
+    fill: rgba(133,0,0,.7);
 }
 </style>

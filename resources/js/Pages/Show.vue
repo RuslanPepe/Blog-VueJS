@@ -1,31 +1,24 @@
 <template>
-    <div class="w-50 mx-auto" v-if="post">
-        <p class="title">{{ post.id+': '+post.title }}</p>
+    <div class="w-50 mx-auto" v-if="postStore.post">
+        <p class="title">{{ postStore.post.id+': '+postStore.post.title }}</p>
 
-        <p class="content">Content: {{ post.content }}</p>
-    </div>
-    <div class="update-btn w-50 mx-auto d-flex flex-column">
-        <router-link :to="{ name: `post.edit`, params: { id: post.id } }" class="btn btn-outline-success align-self-end mt-auto">edit</router-link>
+        <p class="content">Content: {{ postStore.post.content }}</p>
+        <div class="update-btn d-flex flex-column">
+            <router-link :to="{ name: `post.edit`, params: { id: postStore.post.id } }" class="btn btn-outline-success align-self-end mt-auto">edit</router-link>
+        </div>
     </div>
 </template>
 
 <script setup>
 import router from "../Router.js";
-import {onMounted, ref} from "vue";
+import {onBeforeMount, onMounted} from "vue";
+import {usePostStore} from "../stores/post.js";
 
-const post = ref([])
+const postStore = usePostStore()
 
-onMounted(() => {
-    getPosts()
+onBeforeMount(() => {
+    postStore.getPost()
 })
-
-const getPosts = () => {
-    axios.get(`/api/post/${router.currentRoute.value.params.id}`)
-        .then(res => {
-            console.log(res)
-            post.value = res.data.data
-        })
-}
 
 </script>
 
