@@ -18,6 +18,7 @@ class PostsResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'content' => $this->content,
+//            'isLiked' =>
         ];
     }
 }

@@ -11,10 +11,9 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller {
     public function index() {
-//        $posts = Post::all();
+//        $posts = Post::find(1);
 //        return $posts;
         $post = Post::paginate(20);
-//        return$post;
         return PostsResource::collection($post);
     }
     public function store(PostRequest $request) {
