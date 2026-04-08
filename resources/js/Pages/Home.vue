@@ -12,6 +12,8 @@
                     </li>
                 </ul>
             </div>
+            <router-link :to="{ name: 'user.reg' }" class="nav-link p-2">Reg</router-link>
+            <router-link :to="{ name: 'user.login' }" class="nav-link p-2">Login</router-link>
         </div>
     </nav>
     <router-view/>

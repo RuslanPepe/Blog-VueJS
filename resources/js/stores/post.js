@@ -66,5 +66,13 @@ export const usePostStore = defineStore('post', {
                 })
         },
 
+        clearPost() {
+            this.post = {
+                id: null,
+                title: '',
+                content: '',
+            }
+        }
+
     }
 })

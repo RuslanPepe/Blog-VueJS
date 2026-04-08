@@ -16,9 +16,12 @@
 
 <script setup>
 import {usePostStore} from "../stores/post.js";
-
+import {onBeforeMount} from "vue";
 
 const postStore = usePostStore()
+onBeforeMount(() => {
+    postStore.clearPost()
+})
 
 </script>
 
