@@ -9,6 +9,7 @@ import Login from "./Pages/Login.vue";
 import axios from "axios";
 import {useAuthStore} from "./stores/auth.js";
 import {useUserStore} from "./stores/user.js";
+import Profile from "./Pages/Profile.vue";
 // import { useAuthStore } from "./stores/auth.js";
 
 const routes = [
@@ -41,6 +42,11 @@ const routes = [
         path: '/login',
         'name': 'user.login',
         component: Login
+    },
+    {
+        path: '/profile',
+        'name': 'user.profile',
+        component: Profile
     },
 ]
 

@@ -15,12 +15,15 @@
             <router-link v-show="!userStore.isAuthGet" :to="{ name: 'user.reg' }" class="nav-link p-2">Reg</router-link>
             <router-link v-show="!userStore.isAuthGet" :to="{ name: 'user.login' }" class="nav-link p-2">Login</router-link>
             <button v-show="userStore.isAuthGet" class="nav-link p-2" type="button" @click.prevent="userStore.userLogout">Logout</button>
-<!--            //logout-->
+            <router-link v-show="userStore.isAuthGet" :to="{ name: 'user.profile' }" class="nav-link p-2">Profile</router-link>
+            <!--            //logout-->
         </div>
     </nav>
-    {{ userStore.isAuth }}
-    {{ userStore.isAuthGet }}
+<!--    {{ userStore.isAuth }}-->
+<!--    {{ userStore.isAuthGet }}-->
+<!--    <div class="container-fluid">-->
     <router-view/>
+<!--    </div>-->
 </template>
 
 <script setup>

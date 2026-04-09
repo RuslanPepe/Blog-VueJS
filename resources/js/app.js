@@ -4,7 +4,6 @@ import { createApp, h } from 'vue'
 // import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import router from "./Router.js";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import 'tailwindcss/index.css'
 import { createPinia } from "pinia";
 import Index from "./Pages/Index.vue";
 import {useUserStore} from "./stores/user.js";
@@ -16,7 +15,5 @@ app.use(createPinia())
 await useUserStore().userFetch()
 
 app.use(router)
-
-// useUserStore().userCheckAuth()
 
 app.mount('#app')
