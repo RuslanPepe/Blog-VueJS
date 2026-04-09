@@ -29,6 +29,7 @@ class UserController extends Controller {
 
     }
     public function logout(Request $request) {
-        return $request->user()->tokens()->delete();
+        $request->session()->flush();
+        return response()->json('OK', 200);
     }
 }

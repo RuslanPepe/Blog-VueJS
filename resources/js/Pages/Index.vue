@@ -12,13 +12,14 @@
                     </li>
                 </ul>
             </div>
-            <router-link v-show="!userStore.isAuth" :to="{ name: 'user.reg' }" class="nav-link p-2">Reg</router-link>
-            <router-link v-show="!userStore.isAuth" :to="{ name: 'user.login' }" class="nav-link p-2">Login</router-link>
-            <button class="nav-link p-2" type="button" @click.prevent="userStore.userLogout">Logout</button>
+            <router-link v-show="!userStore.isAuthGet" :to="{ name: 'user.reg' }" class="nav-link p-2">Reg</router-link>
+            <router-link v-show="!userStore.isAuthGet" :to="{ name: 'user.login' }" class="nav-link p-2">Login</router-link>
+            <button v-show="userStore.isAuthGet" class="nav-link p-2" type="button" @click.prevent="userStore.userLogout">Logout</button>
 <!--            //logout-->
         </div>
     </nav>
     {{ userStore.isAuth }}
+    {{ userStore.isAuthGet }}
     <router-view/>
 </template>
 

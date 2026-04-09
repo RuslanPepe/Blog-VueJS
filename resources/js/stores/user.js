@@ -28,7 +28,7 @@ export const useUserStore = defineStore('user', {
 
     actions: {
         async userFetch() {
-            if (this.loaded) return
+            // if (this.loaded) return
 
             await axios.get('/api/user')
                 .then(res => {
@@ -41,7 +41,7 @@ export const useUserStore = defineStore('user', {
                     this.user = null
                     this.isAuth = false
                 })
-            this.loaded = true
+            // this.loaded = true
         },
 
         userRegister()  {
@@ -57,8 +57,9 @@ export const useUserStore = defineStore('user', {
                 .then(res => {
                     console.log(res)
                     if (res?.status === 201){
-                        this.userFetch()
-                        router.push('/')
+                        this.userFetch().then(() => {
+                            router.push('/')
+                        })
                     }
                 })
 
@@ -68,6 +69,9 @@ export const useUserStore = defineStore('user', {
             axios.post('/api/logout')
                 .then(res => {
                     console.log(res)
+                    this.userFetch().then(() => {
+                        router.push('/reg')
+                    })
                 })
                 .catch(err => {
                     console.log(err)

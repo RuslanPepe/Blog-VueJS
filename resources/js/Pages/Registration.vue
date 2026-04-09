@@ -18,6 +18,8 @@
         </div>
         <button type="button" @click.prevent="userStore.userRegister()" class="btn btn-primary">Submit</button>
     </form>
+
+    {{ userStore.user }}
 </template>
 
 <script setup>
