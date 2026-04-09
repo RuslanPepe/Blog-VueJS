@@ -6,11 +6,17 @@ import router from "./Router.js";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'tailwindcss/index.css'
 import { createPinia } from "pinia";
-import Home from "./Pages/Home.vue";
+import Index from "./Pages/Index.vue";
+import {useUserStore} from "./stores/user.js";
 
-const app = createApp(Home)
+const app = createApp(Index)
+
+app.use(createPinia())
+
+await useUserStore().userFetch()
 
 app.use(router)
-app.use(createPinia())
+
+// useUserStore().userCheckAuth()
 
 app.mount('#app')

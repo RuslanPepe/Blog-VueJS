@@ -1,18 +1,21 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import Index from "./Pages/Index.vue";
+import Home from "./Pages/Home.vue";
 import Create from "./Pages/Create.vue";
 import Edit from "./Pages/Edit.vue";
 import Show from "./Pages/Show.vue";
 import Registration from "./Pages/Registration.vue";
 import Login from "./Pages/Login.vue";
+import axios from "axios";
+import {useAuthStore} from "./stores/auth.js";
+import {useUserStore} from "./stores/user.js";
 // import { useAuthStore } from "./stores/auth.js";
 
 const routes = [
     {
         path: '/',
         'name': 'post.index',
-        component: Index
+        component: Home
     },
     {
         path: '/create',
@@ -47,14 +50,9 @@ const router = createRouter({
 })
 
 router.beforeEach(async(to, from) => {
-    let isAuth = null
-
-    try {
-        const response = await axios.get('/api/user')
-        isAuth = !!response.data
-    } catch (e){
-        isAuth = false
-    }
+    console.log(2)
+    const useUser = useUserStore()
+    const isAuth = useUser.isAuth
 
     const publicPages = ['user.login', 'user.reg']
     const pathAuth = publicPages.includes(to.name)

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,11 +17,18 @@ class UserController extends Controller {
         ]);
         Auth::loginUsingId($user->id);
         logger($user);
-        return [
-            'token' => $user->createToken('api-token')->plainTextToken,
-        ];
+        return response()->json([
+            'user' => $user,
+            'access_token' => $user->createToken('api-token')->plainTextToken
+        ], 201);
     }
     public function getUser(Request $request) {
-        return response()->json($request->user());
+        return response()->json(['user' => $request->user()]);
+    }
+    public function login(Request $request) {
+
+    }
+    public function logout(Request $request) {
+        return $request->user()->tokens()->delete();
     }
 }

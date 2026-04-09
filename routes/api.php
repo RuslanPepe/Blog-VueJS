@@ -12,9 +12,11 @@ Route::post('/post', [PostController::class, 'store']);
 Route::patch('/post/{post}', [PostController::class, 'update']);
 Route::delete('/post/{post}', [PostController::class, 'destroy']);
 
-Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'getUser']);
+Route::get('/user', [UserController::class, 'getUser']);
 
 Route::post('/register', [UserController::class, 'register']);
+Route::post('/login', [UserController::class, 'login']);
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::get('/test', function (Request $request) {
    return $request->user();
