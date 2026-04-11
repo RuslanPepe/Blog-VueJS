@@ -10,6 +10,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller {
+    public function userPosts(Request $request) {
+        $post = $request->user()->posts()->paginate(5);
+        return PostsResource::collection($post);
+    }
     public function index() {
 //        $posts = Post::find(1);
 //        return $posts;

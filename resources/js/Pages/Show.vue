@@ -18,6 +18,7 @@ const postStore = usePostStore()
 
 onBeforeMount(() => {
     postStore.getPost()
+    console.log(1.4)
 })
 
 </script>

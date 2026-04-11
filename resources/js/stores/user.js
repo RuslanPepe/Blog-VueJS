@@ -28,20 +28,20 @@ export const useUserStore = defineStore('user', {
 
     actions: {
         async userFetch() {
-            // if (this.loaded) return
+            if (this.loaded) return
 
             await axios.get('/api/user')
                 .then(res => {
                     this.user = res.data.user
                     this.isAuth = this.isAuthGet
-                    // console.log(this.user)
-                    // console.log(useUserStore().isAuth)
+                    console.log(this.user)
+                    console.log(this.isAuth)
                 })
                 .catch(() => {
                     this.user = null
                     this.isAuth = false
                 })
-            // this.loaded = true
+            this.loaded = true
         },
 
         userRegister()  {

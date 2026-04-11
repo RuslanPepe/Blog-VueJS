@@ -56,7 +56,6 @@ const router = createRouter({
 })
 
 router.beforeEach(async(to, from) => {
-    console.log(2)
     const useUser = useUserStore()
     const isAuth = useUser.isAuth
 

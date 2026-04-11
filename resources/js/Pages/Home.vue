@@ -28,13 +28,14 @@
 import {onBeforeMount, onMounted, ref} from "vue";
 import PageNavigation from "../Components/PageNavigation.vue";
 import {usePostStore} from "../stores/post.js";
+import {onBeforeUnmount} from "vue";
+import {useProfileStore} from "../stores/profile.js";
 
 const postStore = usePostStore()
 
 onBeforeMount(() => {
     postStore.getPosts()
 })
-
 
 </script>
 

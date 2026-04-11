@@ -22,16 +22,17 @@
 <!--    {{ userStore.isAuth }}-->
 <!--    {{ userStore.isAuthGet }}-->
 <!--    <div class="container-fluid">-->
-    <router-view/>
+    <router-view :key="$route.fullPath" />
 <!--    </div>-->
 </template>
 
 <script setup>
 import {useUserStore} from "../stores/user.js";
+import {onBeforeUnmount, onMounted} from "vue";
+import {useProfileStore} from "../stores/profile.js";
 // import {onBeforeMount, onMounted} from "vue";
 
 const userStore = useUserStore()
-
 // onBeforeMount(() => {
     // userStore.userCheckAuth()
     // console.log(userStore.isAuth)
