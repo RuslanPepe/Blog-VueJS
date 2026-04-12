@@ -16,7 +16,7 @@
             <label for="password_confirmation" class="form-label">Повторите пароль</label>
             <input type="password" v-model="userStore.userRegData.password_confirmation" autocomplete="off" class="form-control" id="password_confirmation">
         </div>
-        <button type="button" @click.prevent="userStore.userRegister()" class="btn btn-primary">Submit</button>
+        <button type="button" @click.prevent="userStore.userRegister()" class="btn btn-primary">Зарегистрироваться</button>
     </form>
 
     {{ userStore.user }}

@@ -21,15 +21,6 @@ class PostController extends Controller {
             'likedUsers as isLiked' => fn ($q) => $q->where('users.id', $request->user()->id)
         ])->paginate(20);
 
-//        logger($posts->find(3));
-//
-//        $posts = Post::with('likedUsers')->paginate(20);
-//        foreach ($posts as $post) {
-//            $post->isLiked = $post->likedUsers->contains($request->user()->id);
-//        }
-//        logger($posts->find(3)->likedUsers->contains($request->user()->id));
-//        return $posts->likedUsers;
-//        $post = Post::paginate(20);
         return PostsResource::collection($posts);
     }
     public function store(PostRequest $request) {
