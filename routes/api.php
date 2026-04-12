@@ -12,6 +12,7 @@ Route::get('/post/{post}', [PostController::class, 'show']);
 Route::post('/post', [PostController::class, 'store']);
 Route::patch('/post/{post}', [PostController::class, 'update']);
 Route::delete('/post/{post}', [PostController::class, 'destroy']);
+Route::post('/post/like', [PostController::class, 'like']);
 
 Route::get('/user', [UserController::class, 'getUser']);
 

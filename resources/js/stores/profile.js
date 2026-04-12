@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { useRouter } from "vue-router";
-import 
+import axios from "axios";
 
 import router from "../Router.js";
 
@@ -10,9 +10,7 @@ export const useProfileStore = defineStore('profile', {
             status: 0,
             isEdited: 0,
         },
-        posts: {
-            posts: [],
-        },
+        posts: [],
         loadedPosts: false
     }),
 
@@ -44,6 +42,12 @@ export const useProfileStore = defineStore('profile', {
                 .catch(err => {
                     console.log(err)
                     this.loadedPosts = false
+                })
+        },
+        postGetPaginate(url) {
+            axios.get(url)
+                .then(res => {
+                    this.posts = res.data
                 })
         }
     }

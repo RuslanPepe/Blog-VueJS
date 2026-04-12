@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { useRouter } from "vue-router";
 
 import router from "../Router.js";
+import axios from "axios";
 
 export const usePostStore = defineStore('post', {
     state: () => ({
@@ -72,7 +73,22 @@ export const usePostStore = defineStore('post', {
                 title: '',
                 content: '',
             }
-        }
+        },
 
+        postLike(post) {
+            console.log(post.is_liked)
+            post.isLiked = !post.isLiked
+            axios.post('/api/post/like', {id: post.id, isLiked: post.isLiked})
+                .then(res => {
+                    console.log(res)
+                })
+        },
+
+        postGetPaginate(url) {
+            axios.get(url)
+                .then(res => {
+                    this.posts = res.data
+                })
+        },
     }
 })
